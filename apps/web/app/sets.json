@@ -1,0 +1,15 @@
+[
+  {
+    "id": "1",
+    "name": "Legends of Yore",
+    "description": "This set is a collection of cards from the original Yu-Gi-Oh! series. It includes iconic cards like Dark Magician, Blue-Eyes White Dragon, and Exodia the Forbidden One as long as other cards from the original series that are valid for TCG play.",
+    "distribution": {
+      "Common": 7,
+      "Rare": 1,
+      "Ultra Rare": 0,
+      "Secret Rare": 0,
+      "Other": 1
+    },
+    "cards": []
+  }
+]

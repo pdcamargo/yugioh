@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+html {
+  height: 100%;
+}
+
+.lil-gui.root {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+/* 
+  blinker {
+    animation: blinker 1s linear infinite;
+  }
+*/
+.blinker {
+  animation: blinker 1s linear infinite;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+.fancy-border {
+  clip-path: polygon(
+    5% 0%,
+    95% 0%,
+    100% 5%,
+    100% 95%,
+    95% 100%,
+    5% 100%,
+    0% 95%,
+    0% 5%
+  );
+  border: 2px solid #888;
+}
+
+.fancy-button {
+  --border: 2px;
+  --slant: 0.5em;
+  --color: rgb(163 230 53);
+
+  box-shadow:
+    0 0 0 200px inset var(--s, #0000),
+    0 0 0 var(--border) inset var(--color);
+  background:
+    linear-gradient(to bottom left, var(--color) 50%, #0000 50.1%) top right,
+    linear-gradient(to top right, var(--color) 50%, #0000 50.1%) bottom left !important;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--slant)) 0,
+    100% var(--slant),
+    100% 100%,
+    var(--slant) 100%,
+    0 calc(100% - var(--slant))
+  );
+}
