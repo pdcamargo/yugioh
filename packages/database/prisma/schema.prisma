@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String     @id @default(cuid())
+  index         Int        @default(autoincrement())
+  password      String
+  name          String?
+  email         String?    @unique
+  emailVerified DateTime?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  cards         UserCard[]
+  decks         Deck[]
+
+  @@map("users")
+}
+
+model UserCard {
+  id     String @id @default(cuid())
+  index  Int    @default(autoincrement())
+  userId String
+  cardId String // This won't be added to the database, this will be a JSON file fetched by client, but this ID is always fixed
+  artId  String
+
+  rarity String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User       @relation(fields: [userId], references: [id])
+  deckCard DeckCard[]
+
+  @@index([userId])
+  @@map("user_cards")
+}
+
+model Deck {
+  id          String   @id @default(cuid())
+  index       Int      @default(autoincrement())
+  userId      String
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user  User       @relation(fields: [userId], references: [id])
+  cards DeckCard[]
+
+  @@index([userId])
+  @@map("decks")
+}
+
+model DeckCard {
+  id     String @id @default(cuid())
+  index  Int    @default(autoincrement())
+  deckId String
+  cardId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  deck Deck     @relation(fields: [deckId], references: [id])
+  card UserCard @relation(fields: [cardId], references: [id])
+
+  @@index([deckId])
+  @@index([cardId])
+  @@map("deck_cards")
+}

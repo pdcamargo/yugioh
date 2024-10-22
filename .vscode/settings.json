@@ -1,0 +1,14 @@
+{
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "glsl-linter.validatorPath": "C:\\Users\\Meu Computador\\Documents\\gslang\\bin\\glslangValidator",
+  "glsl-linter.fileExtensions": {
+    ".glsl": "glsl",
+    ".vert": "vert",
+    ".frag": "frag"
+  },
+  "git.ignoreLimitWarning": true
+}

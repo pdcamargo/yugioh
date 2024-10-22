@@ -1,0 +1,30 @@
+{
+  "name": "@repo/three",
+  "version": "1.0.0",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "dev": "tsup src/* --watch",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "dependencies": {
+    "glsl-blend": "^1.0.3",
+    "glslify": "^7.1.1",
+    "mikktspace": "^1.1.1",
+    "n8ao": "^1.9.2",
+    "postprocessing": "^6.36.3",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^20.11.24",
+    "@types/three": "^0.169.0",
+    "eslint": "^8.57.0",
+    "rimraf": "^5.0.5",
+    "tsup": "^8.0.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
+  }
+}
