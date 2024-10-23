@@ -62,16 +62,16 @@ export enum MatchPhase {
   END,
 }
 
-export class Player {
+export class YugiohMatchPlayer {
   lifePoints = 8000;
 
   constructor(
     public id: string,
     public name: string,
-    public match: Match,
+    public match: YugiohMatch,
   ) {}
 
-  public get opponent(): Player {
+  public get opponent(): YugiohMatchPlayer {
     return this.match.getOpponentFor(this);
   }
 
@@ -84,27 +84,27 @@ export class Player {
   public damage(amount: number) {}
 }
 
-export class Match {
-  players: Player[] = [];
+export class YugiohMatch {
+  players: YugiohMatchPlayer[] = [];
 
   phase: MatchPhase = MatchPhase.STANDBY;
 
   currentTurnPlayerId: string = "";
 
-  public getOpponentFor(player: Player): Player {
+  public getOpponentFor(player: YugiohMatchPlayer): YugiohMatchPlayer {
     return this.players.find((p) => p.id !== player.id)!;
   }
 
-  public isPlayerTurn(player: Player): boolean {
+  public isPlayerTurn(player: YugiohMatchPlayer): boolean {
     return player.id === this.currentTurnPlayerId;
   }
 }
 
 export abstract class CardEffect {
   abstract apply(
-    match: Match,
-    me: Player,
-    opponent: Player,
+    match: YugiohMatch,
+    me: YugiohMatchPlayer,
+    opponent: YugiohMatchPlayer,
   ): void | Promise<void>;
 }
 
@@ -113,7 +113,11 @@ export class DrawEffect extends CardEffect {
     super();
   }
 
-  apply(match: Match, me: Player, opponent: Player) {
+  apply(
+    match: YugiohMatch,
+    me: YugiohMatchPlayer,
+    opponent: YugiohMatchPlayer,
+  ) {
     me.draw(this.amount);
   }
 }
@@ -123,7 +127,11 @@ export class HealEffect extends CardEffect {
     super();
   }
 
-  apply(match: Match, me: Player, opponent: Player) {
+  apply(
+    match: YugiohMatch,
+    me: YugiohMatchPlayer,
+    opponent: YugiohMatchPlayer,
+  ) {
     me.heal(this.amount);
   }
 }
@@ -136,7 +144,11 @@ export class DamageEffect extends CardEffect {
     super();
   }
 
-  apply(match: Match, me: Player, opponent: Player) {
+  apply(
+    match: YugiohMatch,
+    me: YugiohMatchPlayer,
+    opponent: YugiohMatchPlayer,
+  ) {
     if (this.target === "me") {
       me.damage(this.amount);
     } else {
@@ -147,9 +159,9 @@ export class DamageEffect extends CardEffect {
 
 export abstract class CardCondition {
   abstract check(
-    match: Match,
-    me: Player,
-    opponent: Player,
+    match: YugiohMatch,
+    me: YugiohMatchPlayer,
+    opponent: YugiohMatchPlayer,
   ): boolean | Promise<boolean>;
 }
 
@@ -161,7 +173,11 @@ export class LifePointsCondition extends CardCondition {
     super();
   }
 
-  check(match: Match, me: Player, opponent: Player) {
+  check(
+    match: YugiohMatch,
+    me: YugiohMatchPlayer,
+    opponent: YugiohMatchPlayer,
+  ) {
     if (this.target === "me") {
       return me.lifePoints <= this.amount;
     } else {
@@ -175,7 +191,11 @@ export class TurnPhaseCondition extends CardCondition {
     super();
   }
 
-  check(match: Match, me: Player, opponent: Player) {
+  check(
+    match: YugiohMatch,
+    me: YugiohMatchPlayer,
+    opponent: YugiohMatchPlayer,
+  ) {
     // if phases is an array, it's an or
     if (Array.isArray(this.phases)) {
       return this.phases.some((phase) => match.phase === phase);
@@ -186,13 +206,21 @@ export class TurnPhaseCondition extends CardCondition {
 }
 
 export class MyTurnCondition extends CardCondition {
-  check(match: Match, me: Player, opponent: Player) {
+  check(
+    match: YugiohMatch,
+    me: YugiohMatchPlayer,
+    opponent: YugiohMatchPlayer,
+  ) {
     return me.isMyTurn;
   }
 }
 
 export class OpponentTurnCondition extends CardCondition {
-  check(match: Match, me: Player, opponent: Player) {
+  check(
+    match: YugiohMatch,
+    me: YugiohMatchPlayer,
+    opponent: YugiohMatchPlayer,
+  ) {
     return opponent.isMyTurn;
   }
 }
@@ -201,7 +229,11 @@ export class OpponentTurnCondition extends CardCondition {
  * Combines multiple conditions into a single condition.
  */
 export function withConditions(...conditions: CardCondition[]) {
-  return (match: Match, me: Player, opponent: Player) => {
+  return (
+    match: YugiohMatch,
+    me: YugiohMatchPlayer,
+    opponent: YugiohMatchPlayer,
+  ) => {
     return conditions.every((condition) =>
       condition.check(match, me, opponent),
     );

@@ -5,6 +5,7 @@ module.exports = {
   parserOptions: {
     project: true,
   },
+  ignores: ["**/*.d.ts", "**/*.json"],
   rules: {
     "no-undef": "off",
     "no-unused-vars": "off",

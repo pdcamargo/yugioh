@@ -4,15 +4,53 @@ import "reflect-metadata";
 export function applyWebSocketControllers(io: Server, controllers: any[]) {
   console.group("Websocket");
 
-  io.on("connection", (socket: Socket) => {
-    console.log("a user connected");
+  controllers.forEach((controller) => {
+    console.group(controller.name);
 
-    controllers.forEach((controller) => {
-      if (!controller) {
-        throw new Error("Websocket Controller not found");
+    const events = Reflect.getMetadata("events", controller) as any[];
+    const serverEvents = Reflect.getMetadata(
+      "serverEvents",
+      controller,
+    ) as any[];
+
+    // log used events
+    console.log("Socket Events", events.map((e) => e.eventName).join(", "));
+    console.log(
+      "Server Events",
+      serverEvents.map((e) => e.eventName).join(", "),
+    );
+
+    console.groupEnd();
+  });
+
+  // pre instantiate controllers
+  const instances = controllers.map((controller) => [
+    new controller(),
+    controller,
+  ]);
+
+  io.on("connection", (socket: Socket) => {
+    instances.forEach(([instance, controller]) => {
+      // Inject Socket instance if the class has `@InjectSocket()`
+      const injectSocketPropertyKey = Reflect.getMetadata(
+        "injectSocket",
+        instance,
+      );
+
+      if (injectSocketPropertyKey) {
+        instance[injectSocketPropertyKey] = socket;
       }
 
-      const instance = new controller();
+      // Inject Server (io) instance if the class has `@InjectServer()`
+      const injectServerPropertyKey = Reflect.getMetadata(
+        "injectServer",
+        instance,
+      );
+
+      if (injectServerPropertyKey) {
+        instance[injectServerPropertyKey] = io;
+      }
+
       const events = Reflect.getMetadata("events", controller) as any[];
       const serverEvents = Reflect.getMetadata(
         "serverEvents",

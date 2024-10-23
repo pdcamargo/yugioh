@@ -27,7 +27,7 @@ async function bootstrap() {
   const PORT = process.env.PORT || 3333;
 
   // Dynamically load controllers and apply them
-  const controllersPath = resolve(__dirname, "controllers");
+  const controllersPath = resolve(__dirname, "./controllers");
   const controllerFiles = (await readdir(controllersPath)).filter((file) =>
     file.endsWith(".controller.ts"),
   );

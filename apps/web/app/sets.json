@@ -1,15 +1,220 @@
 [
   {
     "id": "1",
+    "available": {
+      "from": "2024-10-23T00:27:32.194Z",
+      "to": "2024-12-22T00:27:42.019Z"
+    },
+    "packType": "Normal Pack",
+    "coverImage": "/playmat/1.jpg",
     "name": "Legends of Yore",
     "description": "This set is a collection of cards from the original Yu-Gi-Oh! series. It includes iconic cards like Dark Magician, Blue-Eyes White Dragon, and Exodia the Forbidden One as long as other cards from the original series that are valid for TCG play.",
     "distribution": {
-      "Common": 7,
+      "Common": 3,
       "Rare": 1,
       "Ultra Rare": 0,
-      "Secret Rare": 0,
-      "Other": 1
+      "Super Rare": 0,
+      "Other": 5
     },
-    "cards": []
+    "cards": [
+      {
+        "cardId": 89631139,
+        "rarity": "Super Rare",
+        "arts": [
+          {
+            "id": 89631139,
+            "weight": 0.05
+          },
+          {
+            "id": 89631140,
+            "weight": 0.95
+          }
+        ]
+      },
+      {
+        "cardId": 95788410,
+        "rarity": "Common",
+        "arts": [
+          {
+            "id": 95788410,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 43096270,
+        "rarity": "Rare",
+        "arts": [
+          {
+            "id": 43096270,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 11091375,
+        "rarity": "Common",
+        "arts": [
+          {
+            "id": 11091375,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 21615956,
+        "rarity": "Rare",
+        "arts": [
+          {
+            "id": 21615956,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 88241506,
+        "rarity": "Rare",
+        "arts": [
+          {
+            "id": 88241506,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 14235211,
+        "rarity": "Rare",
+        "arts": [
+          {
+            "id": 14235211,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 57662975,
+        "rarity": "Rare",
+        "arts": [
+          {
+            "id": 57662975,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 24094653,
+        "rarity": "Common",
+        "arts": [
+          {
+            "id": 24094653,
+            "weight": 0.9
+          },
+          {
+            "id": 27847700,
+            "weight": 0.1
+          }
+        ]
+      },
+      {
+        "cardId": 41620959,
+        "rarity": "Super Rare",
+        "arts": [
+          {
+            "id": 41620959,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 87025064,
+        "rarity": "Super Rare",
+        "arts": [
+          {
+            "id": 87025064,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 17655904,
+        "rarity": "Common",
+        "arts": [
+          {
+            "id": 17655904,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 81385346,
+        "rarity": "Common",
+        "arts": [
+          {
+            "id": 81385346,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 28596933,
+        "rarity": "Common",
+        "arts": [
+          {
+            "id": 28596933,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 39701395,
+        "rarity": "Super Rare",
+        "arts": [
+          {
+            "id": 39701395,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 18756904,
+        "rarity": "Rare",
+        "arts": [
+          {
+            "id": 18756904,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 83764719,
+        "rarity": "Ultra Rare",
+        "arts": [
+          {
+            "id": 83764719,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 72549351,
+        "rarity": "Rare",
+        "arts": [
+          {
+            "id": 72549351,
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "cardId": 72302403,
+        "rarity": "Super Rare",
+        "arts": [
+          {
+            "id": 72302403,
+            "weight": 1
+          }
+        ]
+      }
+    ]
   }
 ]

@@ -1,6 +1,6 @@
+import type { User } from "@prisma/client";
 import { prisma } from "./client";
 
-import type { User } from "@prisma/client";
 import { hashPassword } from "./password";
 
 const DEFAULT_USERS = [
@@ -9,7 +9,15 @@ const DEFAULT_USERS = [
     name: "Admin",
     email: "admin@mail.com",
     emailVerified: new Date(),
-    password: hashPassword("admin"),
+    password: hashPassword("123"),
+    gems: 10000,
+  },
+  {
+    name: "Patrick",
+    email: "patrick@mail.com",
+    emailVerified: new Date(),
+    password: hashPassword("123"),
+    gems: 99999,
   },
 ] as Array<Partial<User>>;
 

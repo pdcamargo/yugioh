@@ -11,17 +11,31 @@ generator client {
   provider = "prisma-client-js"
 }
 
+/// Always after the prisma-client-js generator
+generator json {
+  provider = "prisma-json-types-generator"
+}
+
 model User {
-  id            String     @id @default(cuid())
-  index         Int        @default(autoincrement())
+  id            String    @id @default(cuid())
+  index         Int       @default(autoincrement())
   password      String
   name          String?
-  email         String?    @unique
+  email         String?   @unique
   emailVerified DateTime?
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
-  cards         UserCard[]
-  decks         Deck[]
+
+  gems Int @default(0)
+
+  neutralGems   Int @default(0)
+  rareGems      Int @default(0)
+  superRareGems Int @default(0)
+  ultraRareGems Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cards UserCard[]
+  decks Deck[]
 
   @@map("users")
 }
@@ -76,4 +90,53 @@ model DeckCard {
   @@index([deckId])
   @@index([cardId])
   @@map("deck_cards")
+}
+
+model Match {
+  id    String @id @default(cuid())
+  index Int    @default(autoincrement())
+
+  matchId String
+
+  player1Id String
+  player2Id String
+
+  player1DeckId String
+  player2DeckId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([player1Id])
+  @@index([player2Id])
+  @@index([matchId])
+  @@map("matches")
+}
+
+model CardSet {
+  id    String @id @default(cuid())
+  index Int    @default(autoincrement())
+
+  name        String
+  description String?
+  coverImage  String
+
+  availableFrom DateTime?
+  availableTo   DateTime?
+
+  packType String
+
+  /// ![{ Common: number; Rare: number; "Super Rare": number; "Ultra Rare": number; Other: number;}]
+  distribution Json
+
+  /// ![{ Common: number; Rare: number; "Super Rare": number; "Ultra Rare": number;}]
+  odds Json
+
+  /// ![{ cardId: number; rarity: string; arts: Array<{ id: number; weight: number; }> }]
+  cards Json[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("card_sets")
 }

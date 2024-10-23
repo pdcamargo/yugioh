@@ -62,6 +62,18 @@ export const ConnectedSocket = () => createParamDecorator("socket");
 export const ConnectedServer = () => createParamDecorator("server");
 export const MessageData = () => createParamDecorator("messageData");
 
+export function InjectSocket(): PropertyDecorator {
+  return (target: any, propertyKey: string | symbol) => {
+    Reflect.defineMetadata("injectSocket", propertyKey, target);
+  };
+}
+
+export function InjectServer(): PropertyDecorator {
+  return (target: any, propertyKey: string | symbol) => {
+    Reflect.defineMetadata("injectServer", propertyKey, target);
+  };
+}
+
 // WebSocket Decorators
 export function WebSocketController(): ClassDecorator {
   return (target) => {

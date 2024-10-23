@@ -38,17 +38,9 @@ declare type CardJsonInfo = {
   desc: string;
   race: string;
   archetype?: string;
-  card_sets?: Array<{
-    set_name: string;
-    set_code: string;
-    set_rarity: string;
-    set_rarity_code: string;
-    set_price: string;
-  }>;
-  card_images: Array<{
+  cardImages: Array<{
     id: number;
-    image_url: string;
-    image_url_cropped: string;
+    imageUrl: string;
   }>;
   typeline?: Array<string>;
   atk?: number;

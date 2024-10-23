@@ -11,7 +11,7 @@ import {
 import type { Response } from "express";
 
 @Controller()
-class AppController {
+export default class AppController {
   @Get()
   async index(
     @Res() res: Response,

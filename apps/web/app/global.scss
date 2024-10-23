@@ -94,3 +94,27 @@ html {
     0 calc(100% - var(--slant))
   );
 }
+
+.fancy-card {
+  --border: 2px;
+  --slant: 1.25em;
+  --color: rgb(9 9 11);
+
+  box-shadow:
+    0 0 0 200px inset var(--s, #0000),
+    0 0 0 var(--border) inset var(--color);
+  background:
+    linear-gradient(to bottom left, var(--color) 50%, #0000 50.1%) top right,
+    linear-gradient(to top right, var(--color) 50%, #0000 50.1%) bottom left !important;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--slant)) 0,
+    100% var(--slant),
+    100% 100%,
+    var(--slant) 100%,
+    0 calc(100% - var(--slant))
+  );
+}
